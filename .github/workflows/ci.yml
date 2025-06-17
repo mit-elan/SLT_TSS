@@ -1,0 +1,25 @@
+name: Feature Branch CI
+on:
+  push:
+    branches:
+      - "feature/*"
+
+#  wenn der branch mit "feature/" beginnt und ein push ist, wird der test durchgeführt
+
+jobs:
+    build-and-test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+        - name: Install Java
+          uses: actions/setup-java@v4
+          with:
+            java-version: '22'
+            distribution: 'temurin'
+            cache: 'maven'
+        - name: Build and Test with Maven
+          run: mvn -B test --file pom.xml
+
+
+
