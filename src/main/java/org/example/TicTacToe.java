@@ -31,7 +31,17 @@ public class TicTacToe {
 
             if (board.place(row, col, currentPlayer.getMarker())) {
                 board.printBoard();
-                System.out.println("Move accepted.\n");
+
+                if (board.hasWinner(currentPlayer.getMarker())) {
+                    System.out.println("Player " + currentPlayer.getMarker() + " wins!");
+                    break;
+                }
+
+                if (board.isFull()) {
+                    System.out.println("It's a draw!");
+                    break;
+                }
+
                 switchCurrentPlayer();
             } else {
                 System.out.println("Invalid move, cell already taken.\n");
