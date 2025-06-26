@@ -23,4 +23,15 @@ public class BoardTest {
         assertEquals('X', board.getGrid()[0][0]); // Wert bleibt 'X'
     }
 
+    @Test
+    public void testPrintBoardAfterMove_JUnit4() {
+        Board board = new Board();
+        board.place(1, 1, 'X');
+        try {
+            board.printBoard();
+        } catch (Exception e) {
+            fail("printBoard() should not throw exception, but threw: " + e.getMessage());
+        }
+    }
+
 }
