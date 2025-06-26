@@ -30,12 +30,14 @@ public class TicTacToe {
             int col = scanner.nextInt();
 
             if (board.place(row, col, currentPlayer.getMarker())) {
+                board.printBoard();
                 System.out.println("Move accepted.\n");
                 switchCurrentPlayer();
             } else {
                 System.out.println("Invalid move, cell already taken.\n");
             }
         }
+
     }
 
 }
