@@ -69,6 +69,14 @@ public class BoardTest {
         assertFalse(board.hasWinner('O'));
     }
 
-
+    @Test
+    public void testResetBoard() {
+        Board board = new Board();
+        board.place(0, 0, 'X');
+        board.place(1, 1, 'O');
+        board.reset();
+        assertEquals(' ', board.getGrid()[0][0]);
+        assertEquals(' ', board.getGrid()[1][1]);
+    }
 
 }

@@ -23,31 +23,42 @@ public class TicTacToe {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Current Player: " + currentPlayer.getMarker());
-            System.out.print("row (0-2): ");
-            int row = scanner.nextInt();
-            System.out.print("column (0-2): ");
-            int col = scanner.nextInt();
+            while (true) {
+                System.out.println("Current Player: " + currentPlayer.getMarker());
+                System.out.print("row (0-2): ");
+                int row = scanner.nextInt();
+                System.out.print("column (0-2): ");
+                int col = scanner.nextInt();
 
-            if (board.place(row, col, currentPlayer.getMarker())) {
-                board.printBoard();
+                if (board.place(row, col, currentPlayer.getMarker())) {
+                    board.printBoard();
 
-                if (board.hasWinner(currentPlayer.getMarker())) {
-                    System.out.println("Player " + currentPlayer.getMarker() + " wins!");
-                    break;
+                    if (board.hasWinner(currentPlayer.getMarker())) {
+                        System.out.println("Player " + currentPlayer.getMarker() + " wins!");
+                        break;
+                    }
+
+                    if (board.isFull()) {
+                        System.out.println("It's a draw!");
+                        break;
+                    }
+
+                    switchCurrentPlayer();
+                } else {
+                    System.out.println("Invalid move, cell already taken.\n");
                 }
+            }
 
-                if (board.isFull()) {
-                    System.out.println("It's a draw!");
-                    break;
-                }
-
-                switchCurrentPlayer();
+            System.out.print("Start new game? (y/n): ");
+            String answer = scanner.next();
+            if (answer.equalsIgnoreCase("y")) {
+                board.reset();
+                currentPlayer = playerX;
             } else {
-                System.out.println("Invalid move, cell already taken.\n");
+                System.out.println("Goodbye!");
+                break;
             }
         }
-
     }
 
 }
