@@ -23,6 +23,26 @@ public class Board {
         return false;
     }
 
+    public boolean hasWinner(char marker) {
+        // Zeilen und Spalten
+        for (int i = 0; i < 3; i++) {
+            if (grid[i][0] == marker && grid[i][1] == marker && grid[i][2] == marker) return true;
+            if (grid[0][i] == marker && grid[1][i] == marker && grid[2][i] == marker) return true;
+        }
+        // Diagonalen
+        if (grid[0][0] == marker && grid[1][1] == marker && grid[2][2] == marker) return true;
+        if (grid[0][2] == marker && grid[1][1] == marker && grid[2][0] == marker) return true;
+
+        return false;
+    }
+
+    public boolean isFull() {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                if (grid[i][j] == ' ') return false;
+        return true;
+    }
+
     public char[][] getGrid() {
         return grid;
     }

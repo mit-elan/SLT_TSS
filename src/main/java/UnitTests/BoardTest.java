@@ -24,7 +24,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testPrintBoardAfterMove_JUnit4() {
+    public void testPrintBoardAfterMove() {
         Board board = new Board();
         board.place(1, 1, 'X');
         try {
@@ -33,5 +33,42 @@ public class BoardTest {
             fail("printBoard() should not throw exception, but threw: " + e.getMessage());
         }
     }
+
+    @Test
+    public void testWinRow() {
+        Board board = new Board();
+        board.place(0, 0, 'X');
+        board.place(0, 1, 'X');
+        board.place(0, 2, 'X');
+        assertTrue(board.hasWinner('X'));
+    }
+
+    @Test
+    public void testWinDiagonal() {
+        Board board = new Board();
+        board.place(0, 0, 'O');
+        board.place(1, 1, 'O');
+        board.place(2, 2, 'O');
+        assertTrue(board.hasWinner('O'));
+    }
+
+    @Test
+    public void testDraw() {
+        Board board = new Board();
+        char[][] filled = {
+                {'X','O','X'},
+                {'X','O','O'},
+                {'O','X','X'}
+        };
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                board.place(i, j, filled[i][j]);
+
+        assertTrue(board.isFull());
+        assertFalse(board.hasWinner('X'));
+        assertFalse(board.hasWinner('O'));
+    }
+
+
 
 }
